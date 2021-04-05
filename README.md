@@ -74,7 +74,7 @@ http://localhost:9090/api
 
 ## Used Technologies
 
-* Spring Boot 2.4.4
+* Spring Boot 2.3.8
 * Minio  
 * Spring Boot Web
 * Spring Boot Validation
