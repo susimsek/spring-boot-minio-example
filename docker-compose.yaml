@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  app:
+    image: app:${SERVICE_IMAGE_TAG}
+    container_name: app
+    restart: ${RESTART_POLICY}
+    environment:
+      - TZ
+      - SERVER_PORT
+      - OPENAPI_TITLE
+      - OPENAPI_DESCRIPTION
+      - OPENAPI_VERSION
+      - OPENAPI_TERMS-OF-SERVICE-URL
+      - OPENAPI_LICENCE
+      - OPENAPI_LICENCE_URL
+      - PROBLEM_FIELD_ERRORS_KEY
+      - PROBLEM_MESSAGE_KEY
+      - PROBLEM_PATH_KEY
+      - PROBLEM_VIOLATIONS_KEY
+      - PROBLEM_ERROR_VALIDATION
+      - PROBLEM_BASE_URL
+      - PROBLEM_UNEXPECTED_ERROR_PACKAGE_LIST
+      - MAX_FILE_SIZE
+      - MINIO_URL
+      - MINIO_BUCKET
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+
+  minio:
+    image: bitnami/minio:${MINIO_IMAGE_TAG}
+    container_name: minio
+    restart: ${RESTART_POLICY}
+    environment:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    volumes:
+      - ./data/minio-data:/data:Z
+    ports:
+      - 9000:9000
